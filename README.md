@@ -33,8 +33,8 @@ Ensure you have Rust installed. If not, follow the official Rust installation gu
 
 Clone the repository:
 ```bash
-git clone https://github.com/yourusername/credit-card-validator.git
-cd credit-card-validator
+git clone https://github.com/mbalzert1978/visa.git
+cd visa
 ```
 Build the project:
 ```bash
