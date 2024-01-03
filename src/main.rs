@@ -12,77 +12,31 @@
 // "124 5678 92 3455"    -> Regel 1: nope, Regel 2: nope
 // "0000 0000 0000 0000" -> Regel 1: check, Regel 2: nope
 mod credit_card;
-mod handler;
+
 use credit_card::CreditCard;
-use handler::{DivideByTen, DivideByTwo, FormatHandler, Handler};
 
 fn main() {
-    let divide_by_ten = DivideByTen::default();
-    let divide_by_two = DivideByTwo::new(divide_by_ten);
-    let mut format = FormatHandler::new(divide_by_two);
-
-    let mut card = CreditCard::new("1234 5678 9012 3450");
-
-    format.execute(&mut card);
-    println!("the card is valid: {}", card.is_valid());
+    let card = CreditCard::new("1234 5678 9012 3450");
+    println!("is valid card {}", card.is_valid());
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    fn setup() -> FormatHandler {
-        let divide_by_ten = DivideByTen::default();
-        let divide_by_two = DivideByTwo::new(divide_by_ten);
-        FormatHandler::new(divide_by_two)
-    }
-
     #[test]
-    fn valid_card_rule_1_and_2() {
-        let mut chain = setup();
-        let mut card = CreditCard::new("1234 5678 9012 3450");
-
-        chain.execute(&mut card);
+    fn is_valid_card() {
+        let card = CreditCard::new("1234 5678 9012 3450");
         assert!(card.is_valid());
     }
-
     #[test]
-    fn valid_card_rule_1_but_not_2() {
-        let mut chain = setup();
-        let mut card = CreditCard::new("1234 5678 9012 3455");
-
-        chain.execute(&mut card);
-        assert!(card.format);
-        assert!(!card.by_ten);
+    fn invalid_card() {
+        let card = CreditCard::new("1234 5678 9012 3455");
+        assert!(!card.is_valid());
     }
-
     #[test]
-    fn invalid_card_rule_1_but_valid_2() {
-        let mut chain = setup();
-        let mut card = CreditCard::new("024 5678 92 3455");
-
-        chain.execute(&mut card);
-        assert!(!card.format);
-        assert!(card.by_ten);
-    }
-
-    #[test]
-    fn invalid_card_neither_rule_1_nor_2() {
-        let mut chain = setup();
-        let mut card = CreditCard::new("124 5678 92 3455");
-
-        chain.execute(&mut card);
-        assert!(!card.format);
-        assert!(!card.by_ten);
-    }
-
-    #[test]
-    fn valid_card_rule_1_but_not_2_zeroes() {
-        let mut chain = setup();
-        let mut card = CreditCard::new("0000 0000 0000 0000");
-
-        chain.execute(&mut card);
-        assert!(card.format);
-        assert!(!card.by_ten);
+    fn invalid_card_zero() {
+        let card = CreditCard::new("0000 0000 0000 0000");
+        assert!(!card.is_valid());
     }
 }
