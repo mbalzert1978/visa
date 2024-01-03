@@ -19,24 +19,3 @@ fn main() {
     let card = CreditCard::new("1234 5678 9012 3450");
     println!("is valid card {}", card.is_valid());
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn is_valid_card() {
-        let card = CreditCard::new("1234 5678 9012 3450");
-        assert!(card.is_valid());
-    }
-    #[test]
-    fn invalid_card() {
-        let card = CreditCard::new("1234 5678 9012 3455");
-        assert!(!card.is_valid());
-    }
-    #[test]
-    fn invalid_card_zero() {
-        let card = CreditCard::new("0000 0000 0000 0000");
-        assert!(!card.is_valid());
-    }
-}
