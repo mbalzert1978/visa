@@ -13,8 +13,14 @@
 // "0000 0000 0000 0000" -> Regel 1: check, Regel 2: nope
 mod validator;
 use validator::CreditCard;
-
 fn main() {
-    let card = CreditCard::new("1234 5678 9012 3450");
-    println!("is valid card {}", card.is_valid());
+    let args: Vec<String> = env::args().collect();
+    if args.len() != 2 {
+        eprintln!("Usage: {} <credit_card_number>", args[0]);
+        std::process::exit(1);
+    }
+    let card = CreditCard::new(&args[1]);
+    println!("{}", card);
+    println!("Is valid card? {}", card.is_valid());
+
 }
