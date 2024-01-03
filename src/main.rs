@@ -11,9 +11,8 @@
 // "024 5678 92 3455"    -> Regel 1: nope, Regel 2: check
 // "124 5678 92 3455"    -> Regel 1: nope, Regel 2: nope
 // "0000 0000 0000 0000" -> Regel 1: check, Regel 2: nope
-mod credit_card;
-
-use credit_card::CreditCard;
+mod validator;
+use validator::CreditCard;
 
 fn main() {
     let card = CreditCard::new("1234 5678 9012 3450");
