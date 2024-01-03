@@ -12,6 +12,8 @@
 // "124 5678 92 3455"    -> Regel 1: nope, Regel 2: nope
 // "0000 0000 0000 0000" -> Regel 1: check, Regel 2: nope
 mod validator;
+use std::env;
+
 use validator::CreditCard;
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -22,5 +24,4 @@ fn main() {
     let card = CreditCard::new(&args[1]);
     println!("{}", card);
     println!("Is valid card? {}", card.is_valid());
-
 }
