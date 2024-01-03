@@ -18,7 +18,7 @@ use validator::CreditCard;
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
-        eprintln!("Usage: {} <credit_card_number>", args[0]);
+        eprintln!("Usage: {} \"<credit_card_number>\"", args[0]);
         std::process::exit(1);
     }
     let card = CreditCard::new(&args[1]);
