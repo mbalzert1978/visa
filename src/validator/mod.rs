@@ -55,11 +55,19 @@
 //! such as `is_valid_length`, `is_numeric`, and `is_valid_numbers`.
 //!
 mod helper;
+use std::fmt;
+
 use helper::{is_numeric, is_valid_length, is_valid_numbers};
 
 /// Represents a Credit Card with validation capabilities.
 pub struct CreditCard {
     number: String,
+}
+
+impl fmt::Display for CreditCard {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Credit Card Number: {}", self.number)
+    }
 }
 
 impl CreditCard {
